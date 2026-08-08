@@ -6,4 +6,6 @@
     --breakpoint-xl: 1920px;
     --breakpoint-2xl: 2560px;
     --breakpoint-3xl: 3440px;
+    --color-moongray: #918F8F; /* Texto do imput */
+    --color-whisperwhite: #DEDDDD; /*Fundo do imput */
 }
