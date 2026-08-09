@@ -26,13 +26,13 @@ export default function Header(){
                 
                 <Link href='/' className="flex gap-4 items-center shrink-0">
                     <Image 
-                    src={'/logo/Logo-Site.png'} 
-                    alt="Logo do site"
-                    width={904}
-                    height={904}
-                    unoptimized
-                    loading="eager"
-                    className="h-20 w-20 rounded-xl xl:h-30 xl:w-30 2xl:h-40 2xl:w-40"
+                        src={'/logo/Logo-Site.png'} 
+                        alt="Logo do site"
+                        width={904}
+                        height={904}
+                        unoptimized
+                        loading="eager"
+                        className="h-20 w-20 rounded-xl xl:h-30 xl:w-30 2xl:h-40 2xl:w-40"
                     />
                 </Link>
 
