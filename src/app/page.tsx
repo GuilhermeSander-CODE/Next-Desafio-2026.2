@@ -1,9 +1,10 @@
 import CarrosselManga from "@/components/carrossel-mangas";
 import HeroSection from "@/components/hero-section";
+import SobreNos from "@/components/secao-sobre";
 
 export default function Home() {
   return (
-    <div className="mx-auto w-full md:pd-0 min-h-screen bg-[url('/Fundo-principal.png')]  bg-center bg-no-repeat">
+    <div className="mx-auto w-full md:pd-0 min-h-screen bg-[url('/Fundo-principal.png')]  bg-center bg-cover bg-no-repeat">
       <HeroSection />
       <CarrosselManga  
         titulo="Mais Vendidos" 
@@ -19,6 +20,7 @@ export default function Home() {
           { id: 9, titulo: "Witch Hat Atelier", descricao: "...", preco: "R$ 29,90", img: "capas/Capa-default-2.png" }
         ]}
       />
+      <SobreNos />
 
       
     </div>
