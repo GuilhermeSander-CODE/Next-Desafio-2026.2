@@ -5,11 +5,11 @@ export default function Search() {
         <form className="flex basis-full" autoComplete="off">
             <div className="flex w-full flex-col items-center gap-6 my-10">
                 <div className="relative flex w-full items-center">
-                    <SearchIcon className="w-7 h-7 absolute text-moongray" />
+                    <SearchIcon className="w-7 h-7 absolute text-moon-gray" />
                     <input id="search" 
                     name="search" 
                     type="text" 
-                    className="w-full rounded-4xl px-3 py-4 border-black bg-whisperwhite 
+                    className="w-full rounded-4xl px-3 py-4 border-black bg-whisper-white 
                     caret-moongray hover:bg-zinc-600 transition-all duration-300"
                     placeholder="Faça a sua busca..."
                     />   
