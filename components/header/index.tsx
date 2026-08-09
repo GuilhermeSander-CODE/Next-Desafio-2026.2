@@ -21,7 +21,7 @@ export default function Header(){
     const toggleNav = () => setIsNavOpen(!isNavOpen)
 
     return(
-        <header className="bg-piano-black sticky top-0 z-20 w-full py-4 px-6 lg:px-12 mb-8">
+        <header className="bg-piano-black sticky top-0 z-20 w-full py-4 px-6 lg:px-12">
             <div className="flex flex-wrap items-center justify-between w-full">
                 
                 <Link href='/' className="flex gap-4 items-center shrink-0">

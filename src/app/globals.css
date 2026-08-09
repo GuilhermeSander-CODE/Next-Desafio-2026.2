@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 @theme{
+    /* Fontes */
+
+    ---font-alkalami: var(--font-alkalami), serif;
 
     /* CORES */
 
