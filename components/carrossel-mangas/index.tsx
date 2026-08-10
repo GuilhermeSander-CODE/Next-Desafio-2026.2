@@ -5,11 +5,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import MangaCard, { Manga } from "@/components/card-manga"
 
 type MangaCarrosselProps = {
-  titulo: string;
   mangas: Manga[];
 };
 
-export default function CarrosselManga({ titulo, mangas }: MangaCarrosselProps) {
+export default function CarrosselManga({ mangas }: MangaCarrosselProps) {
     const carouselRef = useRef<HTMLDivElement>(null);
     
     const scrollLeft = () => {
@@ -29,7 +28,7 @@ export default function CarrosselManga({ titulo, mangas }: MangaCarrosselProps) 
         <section className="w-full py-8 reltive">
             <div className="flex items-center w-full justify-center mb-6 px-2">
                 <h2 className="text-2xl md:text-3xl font-bold text-black tracking-wide">
-                    {titulo}
+                    Mais Vendidos
                 </h2>
             </div>
 

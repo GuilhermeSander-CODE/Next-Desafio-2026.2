@@ -2,7 +2,7 @@ import CardSobre from "./card";
 
 export default function SobreNos(){
     return(
-        <div className="w-full space-y-12">
+        <div className="w-full space-y-12 px-4 sm:px-6">
             <div className="flex items-center w-full justify-center mb-6 px-2">
                 <h2 className="text-2xl md:text-3xl font-bold text-black tracking-wide">
                     Sobre Nós

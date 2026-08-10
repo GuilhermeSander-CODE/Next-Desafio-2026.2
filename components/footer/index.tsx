@@ -17,7 +17,7 @@ const redes = [
 
 export default function Footer() {
   return (
-    <footer className="bg-piano-black w-full mt-24 py-10 px-6 md:px-12 text-white">
+    <footer className="bg-piano-black w-full py-10 px-6 md:px-12 text-white">
       <div className="mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-10 md:gap-8 min-h-70">
         <div className="flex flex-col items-center md:items-center justify-start h-full">
           <Link href="/" className="shrink-0">

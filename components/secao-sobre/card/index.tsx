@@ -8,7 +8,7 @@ type CardSobreProps = {
 
 export default function CardSobre({titulo, descricao, src} : CardSobreProps){
     return(
-        <div className=" flex flex-col items-center justify-center gap-8 max-w-sm 2xl:max-w-md 3xl:max-w-lg p-8
+        <div className=" flex flex-col items-center justify-center gap-6 sm:gap-8 w-full max-w-sm 2xl:max-w-md 3xl:max-w-lg p-6 sm:p-8
         transition-shadow duration-200 rounded-md hover:shadow-2xl bg-whisper-white">
             <Image 
                 src = {src}
