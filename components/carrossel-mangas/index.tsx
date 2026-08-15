@@ -8,7 +8,7 @@ type MangaCarrosselProps = {
   mangas: Manga[];
 };
 
-export default function CarrosselManga({ mangas }: MangaCarrosselProps) {
+export default function CarrosselManga({ mangas = []}: MangaCarrosselProps) {
     const carouselRef = useRef<HTMLDivElement>(null);
     
     const scrollLeft = () => {
@@ -22,6 +22,14 @@ export default function CarrosselManga({ mangas }: MangaCarrosselProps) {
             carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
         }
     };
+
+    if (!mangas || mangas.length === 0) {
+        return (
+            <div className="w-full py-8 text-center text-gray-500">
+                Nenhum mangá disponível no momento.
+            </div>
+        );
+    }
 
     return (
 
@@ -47,9 +55,9 @@ export default function CarrosselManga({ mangas }: MangaCarrosselProps) {
                 >
                     {mangas.map((manga) => (
                         <MangaCard
-                        key={manga.id}
-                        manga={manga}
-                        className="w-44 sm:w-52 h-72 sm:h-80 shrink-0 snap-start"
+                            key={manga.id}
+                            manga={manga}
+                            className="w-44 sm:w-52 h-72 sm:h-80 shrink-0 snap-start"
                         />
                     ))}
                 </div>
