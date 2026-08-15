@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
@@ -13,10 +13,116 @@ datasource db {
   provider = "postgresql"
 }
 
-model Product {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  price       Float
-  createdAt   DateTime @default(now())
+enum Demografia {
+  SHONEN
+  SEINEN
+  SHOJO
+  JOSEI
+  KODOMO
+}
+
+enum Genero {
+  ACAO
+  AVENTURA
+  COMEDIA
+  DRAMA
+  FANTASIA
+  FICCAO_CIENTIFICA
+  ROMANCE
+  SUSPENSE
+  TERROR
+  SLICE_OF_LIFE
+}
+
+enum StatusPedido {
+  PENDENTE
+  PAGO
+  ENVIADO
+  ENTREGUE
+  CANCELADO
+}
+
+model Administrador {
+  id        String   @id @default(uuid())
+  nome      String
+  email     String   @unique
+  senha     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Produto {
+  id         String     @id @default(uuid())
+  titulo     String
+  descricao  String     @db.Text
+  preco      Decimal    @db.Decimal(10, 2)
+  volume     Int        @default(1)
+  autor      String
+  ano        Int
+  imagem     String     
+  estoque    Int        @default(0)
+  
+  genero     Genero
+  demografia Demografia
+
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  
+  itensCarrinho ItemCarrinho[]
+  itensPedido   ItemPedido[]
+}
+
+
+model Carrinho {
+  id        String   @id @default(uuid())
+  sessionId String   @unique 
+
+  itens     ItemCarrinho[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ItemCarrinho {
+  id         String   @id @default(uuid())
+  carrinhoId String
+  carrinho   Carrinho @relation(fields: [carrinhoId], references: [id], onDelete: Cascade)
+  
+  produtoId  String
+  produto    Produto  @relation(fields: [produtoId], references: [id], onDelete: Cascade)
+
+  quantidade Int      @default(1)
+  precoUnit  Decimal  @db.Decimal(10, 2)
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([carrinhoId, produtoId]) 
+}
+
+model Pedido {
+  id           String       @id @default(uuid())
+  nomeCliente  String
+  emailCliente String
+  valorTotal   Decimal      @db.Decimal(10, 2)
+  status       StatusPedido @default(PENDENTE)
+
+  itens        ItemPedido[]
+
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model ItemPedido {
+  id         String   @id @default(uuid())
+  pedidoId   String
+  pedido     Pedido   @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+
+  produtoId  String
+  produto    Produto  @relation(fields: [produtoId], references: [id])
+
+  quantidade Int
+  precoUnit  Decimal  @db.Decimal(10, 2)
 }
