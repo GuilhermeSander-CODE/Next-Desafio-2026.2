@@ -19,6 +19,9 @@ type MangaCardProps = {
 };
 
 export default function MangaCard({ manga, className = "w-48 h-72" }: MangaCardProps) {
+    const precoFormatado = typeof manga.preco == 'number' 
+        ? manga.preco.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})
+        : manga.preco;
     return (
         <div className={`group relative rounded-2xl overflow-hidden bg-white p-1.5 border border-white/20 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-900/40 cursor-pointer ${className}`}>
      
@@ -42,7 +45,7 @@ export default function MangaCard({ manga, className = "w-48 h-72" }: MangaCardP
                     </p>
                     <div className="w-full flex items-center justify-between px-2 my-1">
                         <span className="text-lg font-bold text-white">
-                            R$ {manga.preco}
+                            {precoFormatado}
                         </span>
 
                         <button aria-label="Adicionar ao carrinho" className="bg-persian-red hover:bg-red-700 text-white p-2.5 rounded-xl transition-transform active:scale-95 shadow-md">

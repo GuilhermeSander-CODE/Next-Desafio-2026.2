@@ -2,6 +2,7 @@ import "dotenv/config";
 import { Genero, Demografia } from "../generated/prisma/client";
 import { prisma } from "@/utils/prisma";
 
+
 //Type para recuperar os generos e demografia
 type MALItem = {
   name: string;
@@ -63,6 +64,10 @@ function mapearDemografia(demographics: MALItem[]): Demografia {
 //consumo da api do My Anime List
 
 async function main() {
+
+  await prisma.produto.deleteMany({});
+  
+
   console.log("Buscando mangás da API do MyAnimeList...");
 
   const TOTAL_PAGINAS = 2;

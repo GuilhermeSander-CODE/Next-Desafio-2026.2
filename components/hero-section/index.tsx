@@ -20,7 +20,7 @@ export default function HeroSection() {
                     
                     <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-2">
                         <Link
-                            href="#catalogo"
+                            href="/produtos"
                             className="bg-electric-violet hover:bg-violet-700
                             text-white font-semibold px-6 py-3 rounded-xl transition-all"
                         >
