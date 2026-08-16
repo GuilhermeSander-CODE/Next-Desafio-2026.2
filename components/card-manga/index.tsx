@@ -10,7 +10,6 @@ export type Manga = {
   descricao: string;
   preco: number | string; 
   imagem: string;
-  href?: string;
 };
 
 type MangaCardProps = {
@@ -55,7 +54,7 @@ export default function MangaCard({ manga, className = "w-48 h-72" }: MangaCardP
 
                     
                     <Link 
-                        href={manga.href || `/produtos/${manga.id}`} 
+                        href={`/produtos/${manga.id}`} 
                         className="w-full border border-white/80 hover:bg-white hover:text-black text-white text-xs font-semibold py-1.5 rounded-lg transition-all text-center"
                     >
                         Ver Detalhes

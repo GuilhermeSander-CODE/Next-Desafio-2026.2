@@ -1,6 +1,6 @@
 import MangaCard from "@/components/card-manga";
 import SearchBar from "@/components/search"; 
-import { getProdutosPaginados, FiltroProdutos } from "@/utils/catalogo-manga";
+import { getProdutosPaginados, FiltroProdutos } from "@/utils/mangas-paginados";
 import { Genero, Demografia } from "@/generated/prisma/enums";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -10,7 +10,7 @@ export const dynamic ='force-dynamic'
 
 type Props = {
     searchParams: Promise <{
-         q?: string;
+        q?: string;
         genero?: Genero;
         demografia?: Demografia;
         minPreco?: string;
