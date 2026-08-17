@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Alkalami } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import LayoutWrapper from "@/components/layout-wrapper";
 
 const inter = Inter({
   weight: ['300','400','500','600','700','800','900'],
@@ -26,12 +25,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+
   return (
+    
     <html lang="en" className={alkalami.variable}>
       <body className={inter.className}> 
-        <Header />
-        {children}
-        <Footer />
+        
+        <LayoutWrapper>
+          {children}
+        </LayoutWrapper>
 
       </body>
     </html>
