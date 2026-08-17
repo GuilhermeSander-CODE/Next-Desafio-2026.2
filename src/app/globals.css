@@ -3,7 +3,9 @@
 @theme{
     /* Fontes */
 
-    ---font-alkalami: var(--font-alkalami), serif;
+    --font-inter: var(--font-inter), serif;
+
+    --font-alkalami: var(--font-alkalami), serif;
 
     /* CORES */
 

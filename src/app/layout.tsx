@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Alkalami } from "next/font/google";
+import { Inter, Alkalami } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/layout-wrapper";
 
 const inter = Inter({
   weight: ['300','400','500','600','700','800','900'],
   subsets: ["latin"],
+  variable: '--font-inter'
 });
 
 const alkalami = Alkalami({
@@ -29,7 +29,7 @@ export default function RootLayout({
 
   return (
     
-    <html lang="en" className={alkalami.variable}>
+    <html lang="en" className={`${inter.variable} ${alkalami.variable}`}>
       <body className={inter.className}> 
         
         <LayoutWrapper>

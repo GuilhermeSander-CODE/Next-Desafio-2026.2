@@ -33,7 +33,7 @@ export default function CarrosselManga({ mangas = []}: MangaCarrosselProps) {
 
     return (
 
-        <section className="w-full py-8 reltive">
+        <section className="w-full py-8 relative overflow-hidden ">
             <div className="flex items-center w-full justify-center mb-6 px-2">
                 <h2 className="text-2xl md:text-3xl font-bold text-black tracking-wide">
                     Mais Vendidos
@@ -44,7 +44,7 @@ export default function CarrosselManga({ mangas = []}: MangaCarrosselProps) {
                 <button
                     onClick={scrollLeft}
                     aria-label="Rolar para esquerda"
-                    className="hidden sm:flex absolute -left-4 top-1/2 -translate-y-1/2 z-10 bg-piano-black/90 hover:bg-electric-violet border border-white/20 text-white p-3 rounded-full shadow-2xl backdrop-blur-md opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 active:scale-95 cursor-pointer"
+                    className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-piano-black/90 hover:bg-electric-violet border border-white/20 text-white p-3 rounded-full shadow-2xl backdrop-blur-md opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 active:scale-95 cursor-pointer"
                 >
                     <ChevronLeft className="w-6 h-6" />
                 </button>
@@ -65,7 +65,7 @@ export default function CarrosselManga({ mangas = []}: MangaCarrosselProps) {
                 <button
                     onClick={scrollRight}
                     aria-label="Rolar para direita"
-                    className="hidden sm:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10 bg-piano-black/90 hover:bg-electric-violet border border-white/20 text-white p-3 rounded-full shadow-2xl backdrop-blur-md opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 active:scale-95 cursor-pointer"
+                    className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-piano-black/90 hover:bg-electric-violet border border-white/20 text-white p-3 rounded-full shadow-2xl backdrop-blur-md opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 active:scale-95 cursor-pointer"
                 >
                     <ChevronRight className="w-6 h-6" />
                 </button>
