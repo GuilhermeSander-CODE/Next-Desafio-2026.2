@@ -1,9 +1,12 @@
-import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getMangaDestaque } from "@/utils/manga-destaque";
+import BotaoAdicionarCarrinho from "../botao-adicionar-carrinho";
 
 export default async function HeroSection() {
+
+    
+
     const destaque = await getMangaDestaque();
 
     return (
@@ -70,9 +73,14 @@ export default async function HeroSection() {
                                         })
                                     }
                                 </span>
-                                <button className="bg-persian-red items-center flex flex-row gap-2 justify-center hover:opacity-90 text-white font-bold px-4 py-2 rounded-lg text-sm transition-all">
-                                    <ShoppingCart className="text-white" />
-                                </button>
+                                <BotaoAdicionarCarrinho 
+                                    produto={{
+                                        id: destaque.id,
+                                        titulo: destaque.titulo,
+                                        preco: Number(destaque.preco),
+                                        imagem: destaque.imagem || "/capas/Capa-default-3.png"
+                                    }} 
+                                />
                             </div>
                             <Link 
                                 href={`/produtos/${destaque.id}`} 

@@ -1,8 +1,7 @@
 import { getMangaPorID } from "@/utils/manga-por-id";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { ShoppingCart } from "lucide-react";
-import SeletorQuantidade from "@/components/seletor-de-quantidade";
+import SecaoDeCompra from "@/components/secao-de-compra";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -60,17 +59,15 @@ export default async function PaginaIndividual({ params }: Props) {
                     </span>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-6  mt-4">
-                    <SeletorQuantidade estoqueMaximo={manga.estoque} />
-
-                    <button
-                        aria-label="Adicionar ao carrinho"
-                        className="flex-1 bg-persian-red hover:bg-red-700 text-white font-bold py-3.5 px-6 rounded-2xl transition-all active:scale-95 shadow-md flex items-center justify-center gap-2"
-                    >
-                        <ShoppingCart className="w-5 h-5" />
-                        <span>Adicionar ao Carrinho</span>  
-                    </button>
-                </div>
+               <SecaoDeCompra 
+                    produto={{
+                        id: manga.id,
+                        titulo:  manga.titulo,
+                        preco: Number( manga.preco),
+                        imagem:  manga.imagem,
+                        estoque: manga.estoque,
+                    }} 
+                />
             </div>
         </div>
 

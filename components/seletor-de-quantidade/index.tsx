@@ -1,29 +1,39 @@
 'use client'
 
-import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import { useState } from "react";
 
 type SeletorQuantidadeProps = {
+    quantidade?: number;
     estoqueMaximo?: number; 
-    onChange?: (quantidade: number) => void; 
+    onChange: (quantidade: number) => void; 
 };
 
-export default function SeletorQuantidade({estoqueMaximo = 99, onChange}: SeletorQuantidadeProps) {
-    const [quantidade, setQuantidade] = useState(1);
+export default function SeletorQuantidade({quantidade: quantidadeProp, estoqueMaximo = 99, onChange}: SeletorQuantidadeProps) {
+
+    const [quantidadeLocal, setQuantidadeLocal] = useState(1);
+
+    const isControlado = quantidadeProp !== undefined;
+    const quantidadeAtual = isControlado ? quantidadeProp : quantidadeLocal;
+
+    const alterarQuantidade = (novaQtd: number) => {
+        if (!isControlado) {
+            setQuantidadeLocal(novaQtd);
+        }
+        if (onChange) {
+            onChange(novaQtd);
+        }
+    };
 
     const incrementar = () => {
-        if (quantidade < estoqueMaximo) {
-            const novaQtd = quantidade + 1;
-            setQuantidade(novaQtd);
-            if (onChange) onChange(novaQtd);
+        if (quantidadeAtual < estoqueMaximo) {
+            alterarQuantidade(quantidadeAtual + 1);
         }
     };
 
     const decrementar = () => {
-        if (quantidade > 1) {
-            const novaQtd = quantidade - 1;
-            setQuantidade(novaQtd);
-            if (onChange) onChange(novaQtd);
+        if (quantidadeAtual > 1) {
+            alterarQuantidade(quantidadeAtual - 1);
         }
     };
 
@@ -33,7 +43,7 @@ export default function SeletorQuantidade({estoqueMaximo = 99, onChange}: Seleto
             <button
                 type="button"
                 onClick={decrementar}
-                disabled={quantidade <= 1}
+                disabled={quantidadeAtual <= 1}
                 className="w-9 h-9 flex items-center justify-center rounded-xl bg-titanium-white text-black hover:bg-gray-50 hover:text-black transition-all duration-200 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white/10 disabled:hover:text-white"
                 aria-label="Diminuir quantidade"
             >
@@ -42,13 +52,13 @@ export default function SeletorQuantidade({estoqueMaximo = 99, onChange}: Seleto
 
             
             <span className="w-8 text-center text-lg font-bold text-black select-none">
-                {quantidade}
+                {quantidadeAtual}
             </span>
 
             <button
                 type="button"
                 onClick={incrementar}
-                disabled={quantidade >= estoqueMaximo}
+                disabled={quantidadeAtual >= estoqueMaximo}
                 className="w-9 h-9 flex items-center justify-center rounded-xl bg-titanium-white text-black hover:bg-gray-50 hover:text-black transition-all duration-200 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white/10 disabled:hover:text-white"
                 aria-label="Aumentar quantidade"
             >

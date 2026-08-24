@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { realizarCadastro, realizarLogin } from "@/utils/autenticacao"; 
+import { realizarCadastro, realizarLogin } from "@/services/autenticacao"; 
 
 export default function PaginaAutenticacao() {
     const router = useRouter();
