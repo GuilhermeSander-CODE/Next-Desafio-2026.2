@@ -1,6 +1,30 @@
+'use client'
+
 import { AtSign, MapPin, Phone } from "lucide-react";
+import enviarContatoAction from "../actions/contato-actions";
+import { useState } from "react";
 
 export default function PaginaContato(){
+
+    const [carregando, setCarregando] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+    
+        const formElement = e.currentTarget;
+        const formData = new FormData(formElement);
+
+        setCarregando(true);
+        const resultado = await enviarContatoAction(formData);
+        setCarregando(false);
+
+        alert(resultado.mensagem);
+
+        if (resultado.sucesso) {
+            formElement.reset();
+        }
+    };
+
     return(
         <main className="w-full md:p-0 min-h-screen text-black py-10 px-4 sm:px-8 bg-titanium-white">
             <div className="max-w-6xl mx-auto pb-10">
@@ -16,12 +40,12 @@ export default function PaginaContato(){
                         <div className="flex flex-col gap-4 text-sm font-medium">
                             <div className="flex items-center gap-3">
                                 <Phone className="w-5 h-5 shrink-0"/>
-                                <span>(32)00000-0000</span>
+                                <span>(32) 99123-5568</span>
                             </div>
 
                             <div className="flex items-center gap-3">
                                 <AtSign className="w-5 h-5 shrink-0"/>
-                                <span>email@gmail.com</span>
+                                <span>paraisodomanga@gmail.com</span>
                             </div>
 
                             <div className="flex items-center gap-3">
@@ -41,12 +65,13 @@ export default function PaginaContato(){
                         </div>
                     </div>
 
-                    <form className="flex flex-col gap-4 w-full">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
                         <div className="flex flex-col gap-1.5">
                             <label htmlFor="nome" className="text-sm font-bold">Nome Completo</label>
                             <input 
                                 type="text" 
                                 id="nome"
+                                name="nome"
                                 placeholder="Digite aqui..."
                                 className="w-full bg-white border border-moon-gray rounded-md 
                                 p-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all
@@ -60,6 +85,7 @@ export default function PaginaContato(){
                             <input 
                                 type="email" 
                                 id="email"
+                                name="email"
                                 placeholder="Digite aqui..."
                                 className="w-full bg-white border border-moon-gray rounded-md 
                                 p-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all
@@ -69,9 +95,22 @@ export default function PaginaContato(){
                         </div>
 
                         <div className="flex flex-col gap-1.5">
+                            <label htmlFor="assunto" className="text-sm font-bold">Assunto</label>
+                            <input 
+                                type="text" 
+                                id="assunto"
+                                name="assunto"
+                                placeholder="Ex: Dúvida sobre pedido, sugestão, troca..."
+                                className="w-full bg-white border border-moon-gray rounded-md p-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all placeholder:text-gray-400 shadow-xs"
+                                required
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-1.5">
                             <label htmlFor="mensagem" className="text-sm font-bold">Mensagem</label>
                             <textarea
                                 id="mensagem"
+                                name="mensagem"
                                 rows={5}
                                 placeholder="Digite aqui..."
                                 className="w-full bg-white border border-moon-gray rounded-md 
@@ -83,10 +122,10 @@ export default function PaginaContato(){
                         <div className="flex justify-end mt-2">
                             <button 
                                 type="submit"
-                                className="bg-dodger-blue hover:bg-blue-600 text-white font-semibold
-                                py-2.5 px-8 rounded-lg transition-colors cursor-pointer shadow-md active: scale-95"
+                                disabled={carregando}
+                                className="bg-dodger-blue hover:bg-blue-600 text-white font-semibold py-2.5 px-8 rounded-lg transition-colors cursor-pointer shadow-md active:scale-95 disabled:opacity-50"
                             >
-                                Enviar Mensagem
+                                {carregando ? "Enviando..." : "Enviar Mensagem"}
                             </button>
                         </div>
                     </form>

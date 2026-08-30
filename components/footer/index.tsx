@@ -93,7 +93,7 @@ export default function Footer() {
 
               <div className="flex items-center gap-3 text-moon-gray md:text-white">
                 <AtSign className="w-5 h-5 text-white shrink-0" />
-                <span className="text-sm md:text-base">paraiso.manga@gmail.com</span>
+                <span className="text-sm md:text-base">paraisodomanga@gmail.com</span>
               </div>
 
               <div className="flex items-center gap-3 text-moon-gray md:text-white max-w-xs text-center md:text-left">
