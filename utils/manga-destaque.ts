@@ -1,4 +1,4 @@
-import { prisma } from "@/utils/prisma";
+import { prisma } from "@/src/lib/prisma";
 import { Manga } from "@/components/card-manga";
 
 export async function getMangaDestaque(): Promise<Manga | null> {

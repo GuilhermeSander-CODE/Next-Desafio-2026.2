@@ -8,12 +8,13 @@ import { CartProvider } from "@/src/context/CartContext";
 export default function LayoutWrapper({children}: {children: React.ReactNode }){
     const pathname = usePathname();
 
-    const isAuthPage = pathname === '/login'; 
+    const isAuthPage = pathname === '/login';
+    const isAdminPage = pathname === '/admin';
 
     return(
         <CartProvider>
-            {!isAuthPage && <Header />}
-        
+            {!isAuthPage && !isAdminPage && <Header />}
+            
             {children}
         
             {!isAuthPage && <Footer />}

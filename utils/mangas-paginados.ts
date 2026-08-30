@@ -1,4 +1,4 @@
-import { prisma } from "@/utils/prisma";
+import { prisma } from "@/src/lib/prisma";
 import { Manga } from "@/components/card-manga";
 import { Genero, Demografia, Prisma } from "../generated/prisma/client";
 

@@ -1,5 +1,5 @@
 import { Demografia, Genero } from "@/generated/prisma/enums";
-import {prisma} from "@/utils/prisma"
+import {prisma} from "@/src/lib/prisma"
 
 export type MangaCompleto = {
   id: string;

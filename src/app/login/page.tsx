@@ -1,10 +1,11 @@
 'use client'
 
+import { realizarCadastroAction, realizarLoginAction } from "../actions/auth-actions"; 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { realizarCadastro, realizarLogin } from "@/services/autenticacao"; 
+
 
 export default function PaginaAutenticacao() {
     const router = useRouter();
@@ -17,39 +18,32 @@ export default function PaginaAutenticacao() {
     const [senha, setSenha] = useState("");
     const [confirmarSenha, setConfirmarSenha] = useState("");
 
-    const handleCadastroSubmit = async (e: React.SubmitEvent) => {
+    const handleCadastroSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
         setCarregando(true);
 
-        const resultado = await realizarCadastro({
-            nome,
-            email,
-            senha,
-            confirmarSenha,
-        });
+        const formData = new FormData(e.currentTarget);
+        const resultado = await realizarCadastroAction(formData);
 
         setCarregando(false);
         alert(resultado.mensagem);
 
         if (resultado.sucesso) {
-            setNome("");
-            setEmail("");
-            setSenha("");
-            setConfirmarSenha("");
             setModo("login");
         }
     };
 
-    const handleLoginSubmit = async (e: React.SubmitEvent) => {
+    const handleLoginSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
         setCarregando(true);
 
-        const resultado = await realizarLogin({ email, senha });
+        const formData = new FormData(e.currentTarget);
+        const resultado = await realizarLoginAction(formData);
 
         setCarregando(false);
 
         if (resultado.sucesso) {
-            router.push("/gerenciamento");
+            router.push("/admin");
         } else {
             alert(resultado.mensagem);
         }
@@ -96,6 +90,7 @@ export default function PaginaAutenticacao() {
                                             Email
                                         </label>
                                         <input
+                                            name="email"
                                             type="email"
                                             required
                                             value={email}
@@ -110,6 +105,7 @@ export default function PaginaAutenticacao() {
                                             Senha
                                         </label>
                                         <input
+                                            name="senha"
                                             type="password"
                                             required
                                             value={senha}
@@ -153,6 +149,7 @@ export default function PaginaAutenticacao() {
                                             Nome
                                         </label>
                                         <input
+                                            name="nome"
                                             type="text"
                                             required
                                             value={nome}
@@ -167,6 +164,7 @@ export default function PaginaAutenticacao() {
                                             Email
                                         </label>
                                         <input
+                                            name="email"
                                             type="email"
                                             required
                                             value={email}
@@ -181,6 +179,7 @@ export default function PaginaAutenticacao() {
                                             Senha
                                         </label>
                                         <input
+                                            name="senha"
                                             type="password"
                                             required
                                             value={senha}
@@ -195,6 +194,7 @@ export default function PaginaAutenticacao() {
                                             Confirmar Senha
                                         </label>
                                         <input
+                                            name="confirmarSenha"
                                             type="password"
                                             required
                                             value={confirmarSenha}

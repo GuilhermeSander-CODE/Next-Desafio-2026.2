@@ -19,11 +19,11 @@ export default function CardSobre({titulo, descricao, src} : CardSobreProps){
                 loading="eager"
                 className="max-h-18.75 max-w-18.75 xl:max-h-30 xl:max-w-30 2xl:max-h-55 2xl:max-w-55 "
             />
-            <h1 className=" text-center text-xl xl:text-2xl 2xl:text-3xl 4xl:text-4xl 
+            <h3 className=" text-center text-xl xl:text-2xl 2xl:text-3xl 4xl:text-4xl 
             text-black font-semibold cursor-default ">
                 {titulo}
-            </h1>
-            <p className="text-moon-gray text-lg lg:text-xl 2xl:text-2xl 3xl:text-3xl text-center line-clamp-6">
+            </h3>
+            <p className="text-moon-gray text-lg lg:text-xl 2xl:text-2xl 3xl:text-3xl text-center">
                 {descricao}
             </p>
         </div>

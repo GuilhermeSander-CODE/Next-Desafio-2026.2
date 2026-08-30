@@ -3,10 +3,11 @@ import Image from "next/image";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa6";
 import { AtSign, MapPin, Phone } from "lucide-react";
+
 const links = [
   { href: "/sobre", lable: "Sobre Nós" },
   { href: "/termos", lable: "Termos de Uso" },
-  { href: "/politicas", lable: "Politicas de Privacidade" },
+  { href: "/politica", lable: "Politicas de Privacidade" },
 ];
 
 const redes = [
@@ -87,12 +88,12 @@ export default function Footer() {
             <div className="flex flex-col gap-3 items-center md:items-start">
               <div className="flex items-center gap-3 text-moon-gray md:text-white">
                 <Phone className="w-5 h-5 text-white shrink-0" />
-                <span className="text-sm md:text-base">(32) 00000-0000</span>
+                <span className="text-sm md:text-base">(32) 99123-5568</span>
               </div>
 
               <div className="flex items-center gap-3 text-moon-gray md:text-white">
                 <AtSign className="w-5 h-5 text-white shrink-0" />
-                <span className="text-sm md:text-base">email@email.com</span>
+                <span className="text-sm md:text-base">paraiso.manga@gmail.com</span>
               </div>
 
               <div className="flex items-center gap-3 text-moon-gray md:text-white max-w-xs text-center md:text-left">

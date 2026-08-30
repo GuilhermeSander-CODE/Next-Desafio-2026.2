@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { Genero, Demografia } from "../generated/prisma/client";
-import { prisma } from "@/utils/prisma";
+import { prisma } from "@/src/lib/prisma";
 
 
 //Type para recuperar os generos e demografia

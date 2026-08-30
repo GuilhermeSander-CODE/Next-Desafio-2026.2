@@ -131,6 +131,7 @@ export default function SearchBar() {
                                 <div className="flex gap-2 items-center">
                                     <input
                                         type="number"
+                                        min={0}
                                         placeholder="Min"
                                         value={minPreco}
                                         onChange={(e) => setMinPreco(e.target.value)}
@@ -141,6 +142,7 @@ export default function SearchBar() {
 
                                     <input
                                         type="number"
+                                        min={0}
                                         placeholder="Máx"
                                         value={maxPreco}
                                         onChange={(e) => setMaxPreco(e.target.value)}

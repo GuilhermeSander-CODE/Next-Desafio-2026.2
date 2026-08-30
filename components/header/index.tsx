@@ -11,7 +11,7 @@ const links = [
     {href: '/', lable: 'Home'},
     {href: '/contato', lable: 'Contato'},
     {href: '/produtos', lable: 'Produtos'},
-    {href: '/adimin', lable: 'Gerenciamento'},
+    {href: '/admin', lable: 'Gerenciamento'},
     {href: '/login', lable: 'Login'},
 ]
 
@@ -43,7 +43,7 @@ export default function Header(){
                         />
                     </Link>
 
-                    <nav className="flex justify-end">
+                    <nav className="flex flex-row gap-2 md:gap-4 justify-center items-center">
                         <div className="hidden w-full lg:flex justify-items-end items-center gap-5 xl:gap-6">
                             {links.map((link, index) => 
                                 <Link href={link.href} key={index} className="shrink-0">
@@ -60,26 +60,25 @@ export default function Header(){
                             className="relative p-2.5 rounded-xl text-electric-violet hover:bg-white/20 transition-colors flex items-center justify-center cursor-pointer"
                             aria-label="Abrir carrinho"
                         >
-                            <ShoppingCart className="w-7 h-7 sm:w-8 sm:h-8" />
+                            <ShoppingCart className="w-8 h-8" />
                             {totalItens > 0 && (
                                 <span className="absolute -top-1 -right-1 bg-persian-red text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center animate-in zoom-in duration-200">
                                     {totalItens > 99 ? '99+' : totalItens}
                                 </span>
                             )}
                         </button>
-                        <div className="lg:hidden">
+                        <div className="lg:hidden ml-2">
                             {isNavOpen ?
                                 <X 
                                     onClick={toggleNav}
-                                    className="w-10 h-10 text-electric-violet cursor-pointer "
+                                    className="w-8 h-8 text-electric-violet cursor-pointer "
                                 />
                                 :
                                 <div className="flex gap-4">
                                     <Menu 
                                         onClick={toggleNav}
-                                        className="w-10 h-10 text-electric-violet cursor-pointer"
+                                        className="w-8 h-8 text-electric-violet cursor-pointer"
                                     />
-
                                 </div>
                             }
                         </div>
