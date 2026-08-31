@@ -1,6 +1,7 @@
 import Paginacao from "@/components/paginacao";
 import TabelaGerenciamento from "@/components/tabela-admin";
 import { prisma } from "@/src/lib/prisma";
+import { Demografia, Genero } from "@/src/types/enum";
 
 
 interface PaginaGerenciamentoProps{
@@ -42,6 +43,8 @@ export default async function PaginaGerenciamento({ searchParams }: PaginaGerenc
     const produtosFormatados = produtosBanco.map((produto) => ({
         ...produto,
         preco: Number(produto.preco),
+        genero: produto.genero as unknown as Genero,
+        demografia: produto.demografia as unknown as Demografia,
     }));
 
     const totalPaginas = Math.ceil(totalProdutos / limitePorPagina) || 1;
