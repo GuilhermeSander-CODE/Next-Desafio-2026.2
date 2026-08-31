@@ -50,7 +50,7 @@ export default function PaginaContato(){
 
                             <div className="flex items-center gap-3">
                                 <MapPin className="w-5 h-5 shrink-0"/>
-                                <span>Rua Saldanha Marinho, 391 - Centro - Juiz de Fora/MG</span>
+                                <span>Avenida Barão do Rio Branco, 500 - Centro - Juiz de Fora/MG</span>
                             </div>
 
                         </div>
