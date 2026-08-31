@@ -1,18 +1,26 @@
 'use client'
 
 import { realizarLogoutAction } from "@/src/app/actions/auth-actions";
-import { ChevronLeft, ChevronRight, Home, LogOut, Menu, Package, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home, LogOut, Menu, Package, X, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+type UsuarioProps = {
+    id?: number;
+    name?: string;
+    email?: string;
+};
 
-export default function Sidebar(){
+interface SidebarProps {
+    usuario?: UsuarioProps | null;
+}
+
+export default function Sidebar({ usuario }: SidebarProps){
     const [isOpen, setIsOpen] = useState(false); 
     const [isMobileOpen, setIsMobileOpen] = useState(false); 
     const pathname = usePathname();
-
     const router = useRouter();
 
     const handleLogout = async () => {
@@ -60,6 +68,19 @@ export default function Sidebar(){
                         (
                             <nav className="absolute left-0 top-[calc(100%+8px)] w-full flex flex-col gap-2 p-4 
                             rounded-[20px] bg-white backdrop-blur-md border-2 border-quiet-gray shadow-xl z-50">
+                                
+                                {usuario && (
+                                    <div className="flex items-center gap-3 p-3 bg-black/5 rounded-xl border border-black/10 mb-2">
+                                        <div className="p-2 bg-black/10 rounded-lg">
+                                            <User className="w-5 h-5 text-black" />
+                                        </div>
+                                        <div className="flex flex-col min-w-0">
+                                            <span className="text-sm font-bold text-black truncate">{usuario.name}</span>
+                                            <span className="text-xs text-gray-600 truncate">{usuario.email}</span>
+                                        </div>
+                                    </div>
+                                )}
+                                    
                                 {navItems.map((item) => {
                                     const Icon = item.icon;
                                     const isActive = pathname === item.href;
@@ -104,8 +125,8 @@ export default function Sidebar(){
                     rounded-[20px] border-2 border-quiet-gray
                     bg-white/40 backdrop-blur-md shadow-lg
                     transition-all duration-300 ease-in-out shrink-0
-                    md:absolute md:left-3 md:top-3 md:z-50 md:h-[calc(100vh-24px)]
-                    ${isOpen ? "w-47.5" : "w-17.5"}
+                    md:sticky md:left-3 md:top-3 md:z-50 md:h-[calc(100vh-24px)]
+                    ${isOpen ? "w-48" : "w-18"}
                 `}
             >
                
@@ -153,21 +174,40 @@ export default function Sidebar(){
                 </nav>
 
                 
-                <button
-                    onClick={handleLogout}
-                    className={`
-                        flex items-center gap-3 p-2.5 rounded-xl text-black hover:bg-red-500/10 hover:text-red-600 transition-colors w-full cursor-pointer
-                        ${isOpen ? "justify-start px-3" : "justify-center"}
-                    `}
-                    title={!isOpen ? "Sair" : undefined}
-                >
-                    <LogOut className="w-6 h-6 shrink-0 stroke-[2.5]" />
-                    {isOpen && (
-                        <span className="text-sm font-bold tracking-tight whitespace-nowrap">
-                            Sair
-                        </span>
+                <div className="w-full flex flex-col gap-2 pt-2 border-t border-black/10">
+                    {usuario && (
+                        <div 
+                        className={`flex items-center gap-2.5 p-2 rounded-xl bg-black/5 border border-black/5 w-full ${isOpen ? "px-3" : "justify-center"}`}
+                            title={!isOpen ? `${usuario.name} (${usuario.email})` : undefined}
+                        >
+                            <div className="p-1.5 bg-black/10 rounded-lg shrink-0">
+                                <User className="w-5 h-5 text-black" />
+                            </div>
+                            {isOpen && (
+                                <div className="flex flex-col min-w-0 leading-tight">
+                                    <span className="text-xs font-bold text-black truncate">{usuario.name}</span>
+                                    <span className="text-[10px] text-gray-600 truncate">{usuario.email}</span>
+                                </div>
+                            )}
+                        </div>
                     )}
-                </button>
+
+                    <button
+                        onClick={handleLogout}
+                        className={`
+                            flex items-center gap-3 p-2.5 rounded-xl text-black hover:bg-red-500/10 hover:text-red-600 transition-colors w-full cursor-pointer
+                            ${isOpen ? "justify-start px-3" : "justify-center"}
+                        `}
+                        title={!isOpen ? "Sair" : undefined}
+                    >
+                        <LogOut className="w-6 h-6 shrink-0 stroke-[2.5]" />
+                        {isOpen && (
+                            <span className="text-sm font-bold tracking-tight whitespace-nowrap">
+                                Sair
+                            </span>
+                        )}
+                    </button>
+                </div>
             </aside>
         </>
     )

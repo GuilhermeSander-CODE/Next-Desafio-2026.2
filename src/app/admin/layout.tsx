@@ -1,20 +1,21 @@
 import Sidebar from "@/components/sidebar";
-import {cookies} from "next/headers";
 import { redirect } from "next/navigation";
+import { obterUsuarioAtualAction, realizarLogoutAction } from "../actions/auth-actions";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }){
-    const cookieStore = await cookies();
-    const token = cookieStore.get("auth_token")?.value;
+    const { sucesso, usuario } = await obterUsuarioAtualAction();
 
-    if (!token) {
+    
+    if (!sucesso || !usuario) {
+        await realizarLogoutAction();
         redirect("/login");
     }
 
     return(
-        <main className="relative flex pb-3 pl-1 pt-3 pr-3 flex-col md:flex-row min-h-screen w-full bg-[url('/Fundo-principal.png')] bg-center bg-cover bg-fixed bg-no-repeat">
-            <Sidebar />
+        <main className="min-h-screen w-full bg-[url('/Fundo-principal.png')] bg-center bg-cover bg-fixed bg-no-repeat p-3 flex flex-col md:flex-row gap-4">
+            <Sidebar usuario={usuario} />
 
-            <div className="flex-1 w-full ml-0 md:ml-24 transition-all duration-300">
+            <div className="flex-1 min-w-0">
                 {children}
             </div>
         </main>

@@ -1,7 +1,7 @@
 'use client'
 
-import { realizarCadastroAction, realizarLoginAction } from "../actions/auth-actions"; 
-import { useState } from "react";
+import { obterUsuarioAtualAction, realizarCadastroAction, realizarLoginAction } from "../actions/auth-actions"; 
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -12,11 +12,24 @@ export default function PaginaAutenticacao() {
 
     const [modo, setModo] = useState<"login" | "cadastro">("login");
     const [carregando, setCarregando] = useState(false);
+    const [verificandoSessao, setVerificandoSessao] = useState(true);
 
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [confirmarSenha, setConfirmarSenha] = useState("");
+
+    useEffect(() => {
+        async function verificarSessaoAtiva() {
+            const { sucesso } = await obterUsuarioAtualAction();
+            if (sucesso) {
+                router.replace("/admin");
+            } else {
+                setVerificandoSessao(false);
+            }
+        }
+        verificarSessaoAtiva();
+    }, [router]);
 
     const handleCadastroSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -44,10 +57,19 @@ export default function PaginaAutenticacao() {
 
         if (resultado.sucesso) {
             router.push("/admin");
-        } else {
+        } 
+        else {
             alert(resultado.mensagem);
         }
     };
+
+    if (verificandoSessao) {
+        return (
+            <main className="w-full min-h-screen bg-black flex items-center justify-center text-white font-medium">
+                Verificando autenticação...
+            </main>
+        );
+    }
 
     return (
         <main className="relative w-full min-h-screen bg-black overflow-hidden flex items-center justify-center">

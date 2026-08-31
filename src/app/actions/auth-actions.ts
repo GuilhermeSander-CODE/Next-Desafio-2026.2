@@ -9,6 +9,58 @@ export type RespostaAuth = {
     mensagem?: string;
 };
 
+export type Usuario = {
+    id: number;
+    name: string;
+    email: string;
+    email_verified_at?: string | null;
+    created_at?: string;
+    updated_at?: string;
+};
+
+export type RespostaUsuarioAtual = {
+    sucesso: boolean;
+    usuario?: Usuario;
+    mensagem?: string;
+};
+
+export async function obterUsuarioAtualAction(): Promise<RespostaUsuarioAtual> {
+    try {
+        const cookieStore = await cookies();
+        const token = cookieStore.get("auth_token")?.value;
+
+        if (!token) {
+            return { sucesso: false, mensagem: "Token não encontrado." };
+        }
+
+        const respostaAPI = await fetch("https://treinamentoapi.codejr.com.br/api/me", {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            cache: "no-store",
+        });
+
+        if (!respostaAPI.ok) {
+            return { sucesso: false, mensagem: "Sessão inválida ou expirada." };
+        }
+
+        const bodyAPI = await respostaAPI.json();
+        const usuario: Usuario = bodyAPI.user || bodyAPI;
+
+        return {
+            sucesso: true,
+            usuario,
+        };
+    } 
+    catch (error) {
+        console.error("Erro ao buscar usuário logado:", error);
+        return { sucesso: false, mensagem: "Falha ao conectar com o serviço de autenticação." };
+    }
+}
+
 export async function realizarCadastroAction(formData: FormData): Promise<RespostaAuth> {
     const nome = formData.get("nome") as string;
     const email = formData.get("email") as string;

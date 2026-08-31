@@ -2,25 +2,38 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Menu, ShoppingCart, X } from "lucide-react";
 import { useCart } from "@/src/context/CartContext";
 import ModalCarrinho from "../modal-carrinho";
+import { obterUsuarioAtualAction } from "@/src/app/actions/auth-actions";
 
-const links = [
-    {href: '/', lable: 'Home'},
-    {href: '/contato', lable: 'Contato'},
-    {href: '/produtos', lable: 'Produtos'},
-    {href: '/admin', lable: 'Gerenciamento'},
-    {href: '/login', lable: 'Login'},
-]
 
 export default function Header(){
 
     const [isNavOpen, setIsNavOpen] = useState(false);
+    const [estaLogado, setEstaLogado] = useState(false);
     const { setIsModalOpen, cartItems } = useCart();
 
     const totalItens = cartItems.reduce((acc, item) => acc + Number(item.quantity), 0);
+
+    useEffect(() => {
+        async function checarStatus() {
+            const res = await obterUsuarioAtualAction();
+            setEstaLogado(res.sucesso);
+        }
+        checarStatus();
+    }, []);
+
+    const links = [
+        {href: '/', lable: 'Home'},
+        {href: '/contato', lable: 'Contato'},
+        {href: '/produtos', lable: 'Produtos'},
+        ...(estaLogado 
+            ? [{ href: '/admin', lable: 'Gerenciamento' }] 
+            : [{ href: '/login', lable: 'Login' }]
+        )
+    ]
 
 
     const toggleNav = () => setIsNavOpen(!isNavOpen)
