@@ -7,7 +7,7 @@ import { buscarMangaJikan } from "@/services/jikan";
 import { editarManga } from "@/src/app/actions/produto-actions"; 
 import { ProdutoModal } from "./visualizar";
 import { createPortal } from "react-dom";
-import { Demografia, Genero } from "@/generated/prisma/enums";
+import { Demografia, Genero } from "@/src/types/enum"; 
 
 interface ModalEditarProps {
     produto: ProdutoModal | null;

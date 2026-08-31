@@ -1,7 +1,7 @@
 import MangaCard from "@/components/card-manga";
 import SearchBar from "@/components/search"; 
 import { getProdutosPaginados, FiltroProdutos } from "@/utils/mangas-paginados";
-import { Genero, Demografia } from "@/generated/prisma/enums";
+import { Genero, Demografia } from "@/src/types/enum";
 import Paginacao from "@/components/paginacao";
 
 type Props = {

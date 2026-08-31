@@ -6,7 +6,7 @@ import { Search, ImagePlus, Loader2, X } from "lucide-react";
 import { buscarMangaJikan } from "@/services/jikan";
 import { criarManga } from "@/src/app/actions/produto-actions"; 
 import { createPortal } from "react-dom";
-import { Demografia, Genero } from "@/generated/prisma/enums";
+import { Demografia, Genero } from "@/src/types/enum";
 
 interface ModalCriarProps {
     isOpen: boolean;
@@ -85,7 +85,7 @@ export default function ModalCriar({ isOpen, onClose }: ModalCriarProps){
 
     return createPortal(
         <div className="fixed inset-0 z-999 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="relative w-full max-w-xl bg-titanium-white rounded-3xl p-6 shadow-2xl border border-gray-300 max-h-[90vh] overflow-y-auto">
+            <div className="relative w-full max-w-xl bg-titanium-white rounded-3xl p-6 shadow-2xl border border-gray-300 max-h-[90vh] overflow-y-auto scrollbar-thumb-electric-violet">
                 <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-black">
                     <X className="w-5 h-5" />
                 </button>

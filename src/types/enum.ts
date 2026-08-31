@@ -1,0 +1,24 @@
+export enum Demografia {
+  SHONEN = "SHONEN",
+  SEINEN = "SEINEN",
+  SHOJO = "SHOJO",
+  JOSEI = "JOSEI",
+  KODOMO = "KODOMO",
+} 
+
+
+
+
+export enum Genero  {
+  ACAO = "ACAO",
+  AVENTURA = "AVENTURA",
+  COMEDIA = "COMEDIA",
+  DRAMA = "DRAMA",
+  FANTASIA = "FANTASIA",
+  FICCAO_CIENTIFICA = "FICCAO_CIENTIFICA",
+  ROMANCE = "ROMANCE",
+  SUSPENSE = "SUSPENSE",
+  TERROR = "TERROR",
+  SLICE_OF_LIFE = "SLICE_OF_LIFE"
+}
+

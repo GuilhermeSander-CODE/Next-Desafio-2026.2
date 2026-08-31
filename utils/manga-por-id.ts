@@ -1,4 +1,4 @@
-import { Demografia, Genero } from "@/generated/prisma/enums";
+import { Demografia, Genero } from "@/src/types/enum";
 import {prisma} from "@/src/lib/prisma"
 
 export type MangaCompleto = {
@@ -28,6 +28,8 @@ export async function getMangaPorID (id: string): Promise<MangaCompleto | null>{
         return{
             ...produto,
             preco: Number(produto.preco),
+            genero: produto.genero as unknown as Genero,
+            demografia: produto.demografia as unknown as Demografia,
         };
     }
     catch(error){
