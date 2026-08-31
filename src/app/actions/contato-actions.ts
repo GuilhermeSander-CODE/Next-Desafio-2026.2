@@ -2,7 +2,7 @@
 
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.Resend_API_Key);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function enviarContatoAction (formData: FormData){
     const nome = formData.get("nome") as string;
