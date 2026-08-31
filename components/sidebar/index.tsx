@@ -34,7 +34,7 @@ export default function Sidebar({ usuario }: SidebarProps){
 
     const navItems = [
         { href: "/", label: "Home", icon: Home },
-        { href: "/adimin", label: "Produtos", icon: Package },
+        { href: "/admin", label: "Produtos", icon: Package },
     ];
 
     return(
