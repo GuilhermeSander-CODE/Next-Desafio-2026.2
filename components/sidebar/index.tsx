@@ -115,8 +115,6 @@ export default function Sidebar({ usuario }: SidebarProps){
             </div>
 
 
-
-
             <aside
                 style={textureStyle}
                 className={`
@@ -125,8 +123,8 @@ export default function Sidebar({ usuario }: SidebarProps){
                     rounded-[20px] border-2 border-quiet-gray
                     bg-white/40 backdrop-blur-md shadow-lg
                     transition-all duration-300 ease-in-out shrink-0
-                    md:sticky md:left-3 md:top-3 md:z-50 md:h-[calc(100vh-24px)]
-                    ${isOpen ? "w-48" : "w-18"}
+                    md:sticky md:left-3 md:top-3 md:z-50 md:h-[calc(100vh-24px)] overflow-hidden
+                    ${isOpen ? "w-52" : "w-18"}
                 `}
             >
                
@@ -156,18 +154,21 @@ export default function Sidebar({ usuario }: SidebarProps){
                                 key={item.href}
                                 href={item.href}
                                 className={`
-                                    flex items-center gap-3 p-2.5 rounded-xl transition-colors font-semibold text-black
+                                    flex items-center gap-3 p-2.5 rounded-xl transition-all font-semibold text-black w-full
                                     ${isActive ? "bg-black/10" : "hover:bg-black/5"}
                                     ${isOpen ? "justify-start px-3" : "justify-center"}
                                 `}  
                                 title={!isOpen ? item.label : undefined}
                             >
                                 <Icon className="w-6 h-6 shrink-0 stroke-[2.5]" />
-                                {isOpen && (
-                                    <span className="text-sm font-bold tracking-tight whitespace-nowrap">
-                                        {item.label}
-                                    </span>
-                                )}
+                                <span 
+                                    className={`
+                                        text-sm font-bold tracking-tight whitespace-nowrap transition-all duration-200
+                                        ${isOpen ? "opacity-100 w-auto" : "opacity-0 w-0 overflow-hidden"}
+                                    `}
+                                >
+                                    {item.label}
+                                </span>
                             </Link>
                         );
                     })}
@@ -184,7 +185,12 @@ export default function Sidebar({ usuario }: SidebarProps){
                                 <User className="w-5 h-5 text-black" />
                             </div>
                             {isOpen && (
-                                <div className="flex flex-col min-w-0 leading-tight">
+                                <div 
+                                    className={`
+                                        flex flex-col min-w-0 leading-tight transition-all duration-200
+                                        ${isOpen ? "opacity-100 w-auto" : "opacity-0 w-0 overflow-hidden"}
+                                    `}
+                                >
                                     <span className="text-xs font-bold text-black truncate">{usuario.name}</span>
                                     <span className="text-[10px] text-gray-600 truncate">{usuario.email}</span>
                                 </div>
@@ -202,7 +208,12 @@ export default function Sidebar({ usuario }: SidebarProps){
                     >
                         <LogOut className="w-6 h-6 shrink-0 stroke-[2.5]" />
                         {isOpen && (
-                            <span className="text-sm font-bold tracking-tight whitespace-nowrap">
+                            <span 
+                                className={`
+                                    text-sm font-bold tracking-tight whitespace-nowrap transition-all duration-200
+                                    ${isOpen ? "opacity-100 w-auto" : "opacity-0 w-0 overflow-hidden"}
+                                `}
+                            >
                                 Sair
                             </span>
                         )}
