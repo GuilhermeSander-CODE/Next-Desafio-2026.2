@@ -2,11 +2,12 @@
 
 import { Eye, Pencil, Plus, Search, Trash2 } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useTransition} from "react";
 import ModalVisualizar, { ProdutoModal } from "../modais-adm/visualizar";
 import ModalEditar from "../modais-adm/atualizar";
 import ModalCriar from "../modais-adm/criar";
 import ModalExcluir from "../modais-adm/deletar";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 interface TabelaGerenciamentoProps {
     produtos: ProdutoModal[];
@@ -15,9 +16,33 @@ interface TabelaGerenciamentoProps {
 
     
 export default function TabelaGerenciamento({ produtos, termoBusca }: TabelaGerenciamentoProps) {
-    
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const [isPending, startTransition] = useTransition();
+    const [termoInput, setTermoInput] = useState(termoBusca);
+
     const [produtoSelecionado, setProdutoSelecionado] = useState<ProdutoModal | null>(null);
     const [modalAberto, setModalAberto] = useState<'visualizar' | 'editar' | 'excluir' | 'criar' | null>(null);
+
+    const atualizarBuscaURL = (termo: string) => {
+        const params = new URLSearchParams(searchParams.toString());
+        
+        if (termo.trim()) {
+            params.set("busca", termo.trim());
+        } else {
+            params.delete("busca");
+        }
+
+        startTransition(() => {
+            router.push(`${pathname}?${params.toString()}`);
+        });
+    };
+
+    const handleFormSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        atualizarBuscaURL(termoInput);
+    };
 
     const handleAbrirModal = (tipo: 'visualizar' | 'editar' | 'excluir', produto: ProdutoModal) => {
         setProdutoSelecionado(produto);
@@ -37,15 +62,22 @@ export default function TabelaGerenciamento({ produtos, termoBusca }: TabelaGere
     return(
         <>
         
-            <div className="flex flex-col border rounded-md border-gray-300/80 p-2.5 sm:p-6 
-                sm:flex-row items-center justify-between gap-4 mb-6"
+            <div className="flex flex-colsm:flex-row items-center justify-between gap-4 mb-6 bg-white/60 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-gray-300/80 shadow-sm"
             >
-                <form method="GET" className="relative w-full sm:w-80">
-                    <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                <form onSubmit={handleFormSubmit} className="relative w-full sm:w-80">
+                    <Search className={`w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${
+                        isPending ? "text-purple-600 animate-pulse" : "text-gray-400"
+                    }`} />
+                    
                     <input
                         type="text"
-                        name="busca"
-                        defaultValue={termoBusca}
+                        value={termoInput}
+                        onChange={(e) => {
+                            setTermoInput(e.target.value);
+                            if (e.target.value === "") {
+                                atualizarBuscaURL("");
+                            }
+                        }}
                         placeholder="Busque pelo nome e pressione Enter..."
                         className="w-full bg-gray-200/80 text-xs font-medium text-gray-800 placeholder-gray-500 rounded-full pl-10 pr-4 py-2.5 outline-none focus:ring-2 focus:ring-black transition-all"
                     />
