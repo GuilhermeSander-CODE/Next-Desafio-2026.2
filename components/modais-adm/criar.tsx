@@ -3,7 +3,7 @@
 import { ChangeEvent, useState, useTransition } from "react";
 import Image from "next/image";
 import { Search, ImagePlus, Loader2, X } from "lucide-react";
-import { buscarMangaJikan } from "@/services/jikan";
+import { buscarMangaKitsu } from "@/services/buscaMangaNoModal";
 import { criarManga } from "@/src/app/actions/produto-actions"; 
 import { createPortal } from "react-dom";
 import { Demografia, Genero } from "@/src/types/enum";
@@ -32,11 +32,11 @@ export default function ModalCriar({ isOpen, onClose }: ModalCriarProps){
 
     if (!isOpen || typeof window === "undefined") return null;
 
-    const handleBuscarMAL = async () => {
+    const handleBuscarManga = async () => {
         if (!termoBusca.trim()) return;
         setBuscandoMal(true);
 
-        const dados = await buscarMangaJikan(termoBusca);
+        const dados = await buscarMangaKitsu(termoBusca);
         setBuscandoMal(false);
 
         if (dados) {
@@ -101,14 +101,14 @@ export default function ModalCriar({ isOpen, onClose }: ModalCriarProps){
                             type="text"
                             value={termoBusca}
                             onChange={(e) => setTermoBusca(e.target.value)}
-                            onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleBuscarMAL())}
+                            onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleBuscarManga())}
                             placeholder="Digite o nome ou id do manga..."
                             className="w-full bg-[#d0d0d0] text-xs font-medium text-gray-800 placeholder-gray-500 rounded-full pl-9 pr-4 py-2 outline-none focus:ring-1 focus:ring-black"
                         />
                     </div>
                     <button
                         type="button"
-                        onClick={handleBuscarMAL}
+                        onClick={handleBuscarManga}
                         disabled={buscandoMal}
                         className="bg-[#c0c0c0] hover:bg-[#b0b0b0] text-xs font-semibold px-4 py-2 rounded-full border border-gray-400 text-gray-800 transition-colors flex items-center gap-1"
                     >
